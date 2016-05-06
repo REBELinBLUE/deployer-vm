@@ -6,5 +6,4 @@
     "source_path": "./workspace",
     "gitconfig": "~/.gitconfig",
     "gitignore": "~/.gitignore_global"
-
 }
