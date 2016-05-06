@@ -1,0 +1,7 @@
+{
+    "cores": 1,
+    "memory": 2024,
+    "ip": "192.168.10.10",
+    "hostname": "deployer",
+    "source_path": "./workspace"
+}
