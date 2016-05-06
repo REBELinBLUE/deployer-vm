@@ -4,7 +4,7 @@ local_config = loadConfig();
 
 Vagrant.configure("2") do |config|
     # Configure the box
-    config.vm.box = "laravel/homestead"
+    config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = local_config["hostname"]
     config.vm.box_check_update = true
 
@@ -53,7 +53,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "file", source: "~/.composer/auth.json", destination: "~/.composer/auth.json"
 
     # Provision
-    #config.vm.provision "shell", inline: "sudo bash /vagrant/examples/dev/provision.sh"
+    config.vm.provision "shell", inline: "sudo bash /vagrant/provisioning/provision.sh"
 
     # Update composer on each boot
     config.vm.provision "shell", inline: "sudo /usr/local/bin/composer self-update", run: "always"
