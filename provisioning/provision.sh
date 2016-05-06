@@ -171,16 +171,6 @@ gem install github_changelog_generator
 # Install diff-so-fancy
 npm install -g diff-so-fancy
 
-# # Install beanstalk console
-# [ ! -d /var/www/beanstalk ] && composer create-project ptrofimov/beanstalk_console -q -n -s dev /var/www/beanstalk
-# [ -d /var/www/html ] && rm -rf /var/www/html
-# chown -R vagrant:vagrant /var/www/beanstalk
-
-# # Copy dev tools config
-# cp /var/www/deployer/examples/dev/nginx.conf /etc/nginx/sites-available/tools.conf
-# ln -fs /etc/nginx/sites-available/tools.conf /etc/nginx/sites-enabled/tools.conf
-# cp /var/www/deployer/examples/dev/redis-commander.conf /etc/supervisor/conf.d/redis-commander.conf
-
 # Copy deployer supervisor and cron config
 cp /vagrant/provisioning/supervisor.conf /etc/supervisor/conf.d/deployer.conf
 cp /vagrant/provisioning/crontab /etc/cron.d/deployer
@@ -207,3 +197,9 @@ echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 # Clean up
 apt-get autoremove -y
+
+# Install deployer dependencies
+cd /var/www/deployer
+composer install
+npm install
+gulp

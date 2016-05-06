@@ -48,8 +48,8 @@ Vagrant.configure("2") do |config|
         s.args = [File.read(File.expand_path("~/.ssh/id_rsa"))]
     end
 
-    config.vm.provision "file", source: "~/.dotfiles/files/.gitconfig", destination: "~/.gitconfig"
-    config.vm.provision "file", source: "~/.dotfiles/files/.gitignore", destination: "~/.gitignore"
+    config.vm.provision "file", source: local_config['gitconfig'], destination: "~/.gitconfig"
+    config.vm.provision "file", source: local_config['gitignore'], destination: "~/.gitignore"
     config.vm.provision "file", source: "~/.composer/auth.json", destination: "~/.composer/auth.json"
 
     # Provision
