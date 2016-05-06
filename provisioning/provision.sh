@@ -3,7 +3,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # Update Package List
-apt-get update
+apt-get -y update
 
 # Update System Packages
 apt-get -y upgrade
@@ -18,13 +18,14 @@ apt-get install -y software-properties-common curl
 apt-add-repository ppa:nginx/development -y
 apt-add-repository ppa:chris-lea/redis-server -y
 apt-add-repository ppa:ondrej/php -y
+apt-add-repository ppa:brightbox/ruby-ng -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386] http://ftp.osuosl.org/pub/mariadb/repo/10.1/ubuntu trusty main'
 
 curl --silent --location https://deb.nodesource.com/setup_5.x | bash -
 
 # Update Package Lists
-apt-get update
+apt-get update -y
 
 # Install Some Basic Packages
 apt-get install -y build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
@@ -108,19 +109,17 @@ service nginx restart
 service php7.0-fpm restart
 
 # Add Vagrant User To WWW-Data
-
 usermod -a -G www-data vagrant
 id vagrant
 groups vagrant
 
 # Install Node
-
 apt-get install -y nodejs
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
 
 # Install SQLite
-apt-get install -y sqlite3 libsqlite3-dev
+apt-get install -y --force-yes sqlite3 libsqlite3-dev
 
 # Install MariaDB
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/data-dir select ''"
@@ -135,14 +134,14 @@ echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
 # Configure MySQL Remote Access
 sed -i '/^bind-address/s/bind-address.*=.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
 
-mysql -uroot -psecret  -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql -uroot -psecret -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
 
 service mysql restart
 
-mysql -uroot -psecret  -e "CREATE USER 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret';"
-mysql -uroot -psecret  -e "GRANT ALL ON *.* TO 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql -uroot -psecret  -e "GRANT ALL ON *.* TO 'homestead'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql -uroot -psecret  -e "FLUSH PRIVILEGES;"
+mysql -uroot -psecret -e "CREATE USER 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret';"
+mysql -uroot -psecret -e "GRANT ALL ON *.* TO 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql -uroot -psecret -e "GRANT ALL ON *.* TO 'homestead'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql -uroot -psecret -e "FLUSH PRIVILEGES;"
 
 service mysql restart
 
@@ -161,21 +160,16 @@ sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
 /etc/init.d/beanstalkd start
 
 # Enable Swap Memory
-# /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
-# /sbin/mkswap /var/swap.1
-# /sbin/swapon /var/swap.1
+/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+/sbin/mkswap /var/swap.1
+/sbin/swapon /var/swap.1
 
-# # Install github changelog generator
-# apt-get update
+# Install github changelog generator
+DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes ruby2.3 ruby2.3-dev httpie
+gem install github_changelog_generator
 
-# apt-add-repository ppa:brightbox/ruby-ng
-# apt-get update -y
-# DEBIAN_FRONTEND=noninteractive apt-get install ruby2.3 ruby2.3-dev httpie -y
-# gem install github_changelog_generator
-
-
-# # Install JS CS, redis commander & diff-so-fancy
-# npm install -g redis-commander jscs diff-so-fancy
+# Install diff-so-fancy
+npm install -g diff-so-fancy
 
 # # Install beanstalk console
 # [ ! -d /var/www/beanstalk ] && composer create-project ptrofimov/beanstalk_console -q -n -s dev /var/www/beanstalk
