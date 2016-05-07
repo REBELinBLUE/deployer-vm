@@ -2,7 +2,7 @@ require_relative "lib/config.rb"
 
 local_config = loadConfig();
 
-Vagrant.configure("2") do |config|
+Vagrant.configure(2) do |config|
     # Configure the box
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = local_config["hostname"]
