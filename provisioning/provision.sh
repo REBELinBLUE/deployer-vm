@@ -190,10 +190,13 @@ service php7.0-fpm restart
 # rm /etc/php/7.0/cli/conf.d/20-xdebug.ini
 
 # Update .profile
+echo '' >> /home/vagrant/.profile
+echo 'export PATH=/var/www/deployer/vendor/bin:$PATH' >> /home/vagrant/.profile
+echo '' >> /home/vagrant/.profile
 echo 'alias php="php -dzend_extension=xdebug.so"' >> /home/vagrant/.profile
 echo 'alias artisan="php artisan"' >> /home/vagrant/.profile
 echo 'alias phpunit="php $(which phpunit)"' >> /home/vagrant/.profile
-echo 'export PATH=/var/www/deployer/vendor/bin:$PATH' >> /home/vagrant/.profile
+echo '' >> /home/vagrant/.profile
 echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 # Clean up
