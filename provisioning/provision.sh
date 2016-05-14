@@ -201,9 +201,3 @@ echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 # Clean up
 apt-get autoremove -y
-
-# Install deployer dependencies
-cd /var/www/deployer
-composer install
-npm install
-gulp
