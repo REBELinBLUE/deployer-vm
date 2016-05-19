@@ -2,7 +2,7 @@
     "cores": 1,
     "memory": 2024,
     "ip": "192.168.10.10",
-    "hostname": "deployer",
+    "hostname": "deployer.app",
     "source_path": "./workspace",
     "gitconfig": "~/.gitconfig",
     "gitignore": "~/.gitignore_global"
