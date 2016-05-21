@@ -10,7 +10,6 @@ Vagrant.configure(2) do |config|
 
     # Configure SSH
     config.ssh.forward_agent = true
-    config.ssh.ssh_command = 'ssh'
 
     # Prevent TTY Errors
     config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
