@@ -55,6 +55,14 @@ rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 service nginx restart
 
+cd /usr/local/src
+git clone https://github.com/imsky/git-fresh.git
+cd git-fresh
+sudo ./install.sh
+cd ..
+rm -rf git-fresh
+cd ~
+
 # Setup Some PHP-FPM Options
 echo "xdebug.remote_enable = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.remote_connect_back = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
