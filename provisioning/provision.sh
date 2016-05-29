@@ -147,16 +147,16 @@ mysql -uroot -psecret -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secr
 
 service mysql restart
 
-mysql -uroot -psecret -e "CREATE USER 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret';"
-mysql -uroot -psecret -e "GRANT ALL ON *.* TO 'homestead'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql -uroot -psecret -e "GRANT ALL ON *.* TO 'homestead'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql -uroot -psecret -e "CREATE USER 'deployer'@'0.0.0.0' IDENTIFIED BY 'secret';"
+mysql -uroot -psecret -e "GRANT ALL ON *.* TO 'deployer'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql -uroot -psecret -e "GRANT ALL ON *.* TO 'deployer'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
 mysql -uroot -psecret -e "FLUSH PRIVILEGES;"
 
 service mysql restart
 
 # Create DB
-mysql -uhomestead -psecret -e "DROP DATABASE IF EXISTS deployer;"
-mysql -uhomestead -psecret -e "CREATE DATABASE deployer DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;"
+mysql -udeployer -psecret -e "DROP DATABASE IF EXISTS deployer;"
+mysql -udeployer -psecret -e "CREATE DATABASE deployer DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;"
 
 # Add Timezone Support To MySQL
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --user=root --password=secret mysql
