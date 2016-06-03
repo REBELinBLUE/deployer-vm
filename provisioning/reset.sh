@@ -8,9 +8,9 @@ cd /var/www/deployer
 php artisan app:reset
 cd -
 
-sudo cp /vagrant/provisioning/supervisor.conf /etc/supervisor/conf.d/deployer.conf
-sudo cp /vagrant/provisioning/crontab /etc/cron.d/deployer
-sudo cp /vagrant//provisioning/nginx.conf /etc/nginx/sites-available/deployer.conf
+sudo cp /var/www/deployer/examples/supervisor.conf /etc/supervisor/conf.d/deployer.conf
+sudo cp /var/www/deployer/examples/crontab /etc/cron.d/deployer
+sudo cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/deployer.conf
 
 sudo service supervisor restart
 redis-cli FLUSHALL
