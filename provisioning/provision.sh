@@ -195,7 +195,7 @@ service cron restart
 service php7.0-fpm restart
 
 # # Stop composer complaining - phpdismod -s cli xdebug isn't working
-# rm /etc/php/7.0/cli/conf.d/20-xdebug.ini
+phpdismod -s cli xdebug
 
 # Update .profile
 echo '' >> /home/vagrant/.profile
