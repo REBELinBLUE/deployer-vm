@@ -180,6 +180,13 @@ gem install github_changelog_generator
 # Install diff-so-fancy
 npm install -g diff-so-fancy
 
+# Install beanstalk console
+if [ ! -d /var/www/beanstalk ]; then
+    composer create-project ptrofimov/beanstalk_console -q -n -s dev /var/www/beanstalk
+    cp /vagrant/provisioning/beanstalk-console-config.php /var/www/beanstalk/config.php
+    chown -R vagrant:vagrant /var/www/beanstalk
+fi
+
 # Copy deployer supervisor and cron config
 cp /vagrant/provisioning/supervisor.conf /etc/supervisor/conf.d/deployer.conf
 cp /vagrant/provisioning/crontab /etc/cron.d/deployer

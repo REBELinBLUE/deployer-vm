@@ -7,6 +7,7 @@ Vagrant.configure(2) do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = local_config["hostname"]
     config.vm.box_check_update = true
+    config.hostsupdater.aliases = ["beanstalk." + local_config["hostname"]]
 
     # Configure SSH
     config.ssh.forward_agent = true
