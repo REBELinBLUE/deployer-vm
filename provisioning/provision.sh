@@ -22,13 +22,15 @@ apt-add-repository ppa:brightbox/ruby-ng -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386] http://ftp.osuosl.org/pub/mariadb/repo/10.1/ubuntu trusty main'
 
+curl -sSL http://git.io/git-extras-setup | sudo bash /dev/stdin
+
 curl --silent --location https://deb.nodesource.com/setup_5.x | bash -
 
 # Update Package Lists
 apt-get update -y
 
 # Install Some Basic Packages
-apt-get install -y build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin git-extras
+apt-get install -y build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
 
 # Set the Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
