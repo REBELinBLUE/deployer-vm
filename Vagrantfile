@@ -58,4 +58,9 @@ Vagrant.configure(2) do |config|
 
     # Update composer on each boot
     config.vm.provision "shell", inline: "sudo /usr/local/bin/composer self-update", run: "always"
+
+    # clean up files on the host after the guest is destroyed
+    config.trigger.before :halt do
+        run_remote "sudo rm -f /vagrant/xdebug/cachegrind.out.*"
+    end
 end

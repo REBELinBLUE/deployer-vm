@@ -1,3 +1,4 @@
 .vagrant/
 workspace/
 config.json
+xdebug/*
