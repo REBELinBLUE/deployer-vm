@@ -13,14 +13,14 @@ echo "LC_ALL=en_GB.UTF-8" >> /etc/default/locale
 locale-gen en_GB.UTF-8
 
 # Install Some PPAs
-apt-get install -y software-properties-common curl
+apt-get install -y --force-yes software-properties-common curl
 
 apt-add-repository ppa:nginx/development -y
 apt-add-repository ppa:chris-lea/redis-server -y
 apt-add-repository ppa:ondrej/php -y
 apt-add-repository ppa:brightbox/ruby-ng -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-add-apt-repository 'deb [arch=amd64,i386] http://ftp.osuosl.org/pub/mariadb/repo/10.1/ubuntu trusty main'
+add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
 
 curl -sSL http://git.io/git-extras-setup | sudo bash /dev/stdin
 
@@ -30,7 +30,7 @@ curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 apt-get update -y
 
 # Install Some Basic Packages
-apt-get install -y build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
+apt-get install -y --force-yes build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
 
 # Set the Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
@@ -129,7 +129,7 @@ id vagrant
 groups vagrant
 
 # Install Node
-apt-get install -y nodejs
+apt-get install -y --force-yes nodejs
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
 
@@ -141,7 +141,7 @@ debconf-set-selections <<< "mariadb-server-10.1 mysql-server/data-dir select ''"
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/root_password password secret"
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/root_password_again password secret"
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server
+DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes mariadb-server
 
 # Configure MySQL Password Lifetime
 echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
@@ -168,7 +168,7 @@ mysql -udeployer -psecret -e "CREATE DATABASE deployer DEFAULT CHARACTER SET utf
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --user=root --password=secret mysql
 
 # Install A Few Other Things
-apt-get install -y redis-server memcached beanstalkd
+apt-get install -y --force-yes redis-server memcached beanstalkd
 
 # Configure Beanstalkd
 sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
@@ -222,4 +222,4 @@ echo '' >> /home/vagrant/.profile
 echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 # Clean up
-apt-get autoremove -y
+apt-get autoremove -y --force-yes
