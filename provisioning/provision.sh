@@ -24,7 +24,7 @@ add-apt-repository 'deb [arch=amd64,i386] http://ftp.osuosl.org/pub/mariadb/repo
 
 curl -sSL http://git.io/git-extras-setup | sudo bash /dev/stdin
 
-curl --silent --location https://deb.nodesource.com/setup_5.x | bash -
+curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 
 # Update Package Lists
 apt-get update -y
