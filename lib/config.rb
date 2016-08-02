@@ -6,12 +6,15 @@ def loadConfig()
     config["override"] = {}
     config["default"] = {}
 
-    if File.exists?(File.expand_path "./config.json")
-        config["override"] = JSON.parse(File.read(File.expand_path "./config.json"))
+    myConfig = File.expand_path(File.join(File.dirname(__FILE__), "../config.json"))
+    baseConfig = File.expand_path(File.join(File.dirname(__FILE__), "../config.default.json"))
+
+    if File.exists?(myConfig)
+        config["override"] = JSON.parse(File.read(myConfig))
     end
 
-    if File.exists?(File.expand_path "./config.default.json")
-        config["default"] = JSON.parse(File.read(File.expand_path "./config.default.json"))
+    if File.exists?(baseConfig)
+        config["default"] = JSON.parse(File.read(baseConfig))
     end
 
     result = config["default"]
