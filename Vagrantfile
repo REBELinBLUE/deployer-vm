@@ -7,7 +7,10 @@ Vagrant.configure(2) do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = local_config["hostname"]
     config.vm.box_check_update = true
-    config.hostsupdater.aliases = ["beanstalk." + local_config["hostname"]]
+
+    if Vagrant.has_plugin?('vagrant-hostsupdater')
+        config.hostsupdater.aliases = ["beanstalk." + local_config["hostname"]]
+    end
 
     # Configure SSH
     config.ssh.forward_agent = true
@@ -59,8 +62,11 @@ Vagrant.configure(2) do |config|
     # Update composer on each boot
     config.vm.provision "shell", inline: "sudo /usr/local/bin/composer self-update", run: "always"
 
-    # clean up files on the host after the guest is destroyed
-    config.trigger.before :halt do
-        run_remote "sudo rm -f /vagrant/xdebug/cachegrind.out.*"
+    if Vagrant.has_plugin?('vagrant-triggers')
+        # clean up files on the host after the guest is destroyed
+        config.trigger.before :halt do
+            run_remote "sudo rm -f /vagrant/xdebug/cachegrind.out.*"
+        end
     end
+end
 end
