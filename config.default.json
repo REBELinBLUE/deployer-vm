@@ -8,5 +8,7 @@
     "gitorder": "~/.gitorder_global",
     "gitignore": "~/.gitignore_global",
     "gitattributes": "~/.gitattributes_global",
-    "composerauth": "~/.composer/auth.json"
+    "composerauth": "~/.composer/auth.json",
+    "public_key": "~/.ssh/id_rsa.pub",
+    "private_key": "~/.ssh/id_rsa"
 }

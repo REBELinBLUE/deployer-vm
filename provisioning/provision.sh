@@ -207,36 +207,8 @@ service nginx restart
 service cron restart
 service php7.0-fpm restart
 
-# # Stop composer complaining - phpdismod -s cli xdebug isn't working
+# Stop composer complaining - phpdismod -s cli xdebug isn't working
 phpdismod -s cli xdebug
-
-# Update .profile
-echo '' >> /home/vagrant/.profile
-echo 'export PATH=/var/www/deployer/vendor/bin:$PATH' >> /home/vagrant/.profile
-echo '' >> /home/vagrant/.profile
-echo 'alias php="php -dzend_extension=xdebug.so"' >> /home/vagrant/.profile
-echo 'alias artisan="php artisan"' >> /home/vagrant/.profile
-echo 'alias phpunit="php $(which phpunit)"' >> /home/vagrant/.profile
-echo 'alias fresh="/vagrant/provisioning/reset.sh"' >> /home/vagrant/.profile
-echo '' >> /home/vagrant/.profile
-echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 # Clean up
 apt-get autoremove -y --force-yes
-
-git config --global --unset diff.orderfile
-git config --global --unset core.excludesfile
-git config --global --unset core.attributesfile
-
-# Sort out paths for git
-if [ -e ~/.gitorder_global ]; then
-    git config --global diff.orderfile ~/.gitorder_global
-fi
-
-if [ -e ~/.gitignore_global ]; then
-    git config --global core.excludesfile ~/.gitignore_global
-fi
-
-if [ -e ~/.gitattributes_global ]; then
-    git config --global core.attributesfile ~/.gitattributes_global
-fi
