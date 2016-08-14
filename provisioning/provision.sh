@@ -223,3 +223,20 @@ echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 # Clean up
 apt-get autoremove -y --force-yes
+
+git config --global --unset diff.orderfile
+git config --global --unset core.excludesfile
+git config --global --unset core.attributesfile
+
+# Sort out paths for git
+if [ -e ~/.gitorder_global ]; then
+    git config --global diff.orderfile ~/.gitorder_global
+fi
+
+if [ -e ~/.gitignore_global ]; then
+    git config --global core.excludesfile ~/.gitignore_global
+fi
+
+if [ -e ~/.gitattributes_global ]; then
+    git config --global core.attributesfile ~/.gitattributes_global
+fi

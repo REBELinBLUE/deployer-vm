@@ -5,6 +5,8 @@
     "hostname": "deployer.app",
     "source_path": "./workspace",
     "gitconfig": "~/.gitconfig",
-    "gitorder": "~/.gitorder",
-    "gitignore": "~/.gitignore_global"
+    "gitorder": "~/.gitorder_global",
+    "gitignore": "~/.gitignore_global",
+    "gitattributes": "~/.gitattributes_global",
+    "composerauth": "~/.composer/auth.json"
 }

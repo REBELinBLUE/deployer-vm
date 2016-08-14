@@ -52,10 +52,26 @@ Vagrant.configure(2) do |config|
         s.args = [File.read(File.expand_path("~/.ssh/id_rsa"))]
     end
 
-    config.vm.provision "file", source: local_config['gitconfig'], destination: "~/.gitconfig"
-    config.vm.provision "file", source: local_config['gitignore'], destination: "~/.gitignore"
-    config.vm.provision "file", source: local_config['gitorder'], destination: "~/.gitorder"
-    config.vm.provision "file", source: "~/.composer/auth.json", destination: "~/.composer/auth.json"
+    # Copy various files if they exist
+    if File.exist?(local_config['gitconfig'])
+        config.vm.provision "file", source: local_config['gitconfig'], destination: "~/.gitconfig"
+    end
+
+    if File.exist?(local_config['gitignore'])
+        config.vm.provision "file", source: local_config['gitignore'], destination: "~/.gitignore_global"
+    end
+
+    if File.exist?(local_config['gitorder'])
+        config.vm.provision "file", source: local_config['gitorder'], destination: "~/.gitorder_global"
+    end
+
+    if File.exist?(local_config['gitattributes'])
+        config.vm.provision "file", source: local_config['gitattributes'], destination: "~/.gitattributes_global"
+    end
+
+    if File.exist?(local_config['composerauth'])
+        config.vm.provision "file", source: local_config['composerauth'], destination: "~/.composer/auth.json"
+    end
 
     # Provision
     config.vm.provision "shell", inline: "sudo bash /vagrant/provisioning/provision.sh"
