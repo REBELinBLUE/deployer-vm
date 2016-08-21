@@ -2,3 +2,4 @@
 workspace/
 config.json
 xdebug/*
+provisioning/extras.sh

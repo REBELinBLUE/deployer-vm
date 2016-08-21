@@ -240,3 +240,7 @@ fi
 if [ -e ~/.gitattributes_global ]; then
     git config --global core.attributesfile ~/.gitattributes_global
 fi
+
+if [ -f /vagrant/provisioning/extras.sh ]; then
+    /vagrant/provisioning/extras.sh
+fi
