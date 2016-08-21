@@ -212,3 +212,5 @@ phpdismod -s cli xdebug
 
 # Clean up
 apt-get autoremove -y --force-yes
+
+ln -s /vagrant/provisioning/create-release.sh /usr/local/bin/create-release
