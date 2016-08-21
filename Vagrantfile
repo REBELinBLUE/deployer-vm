@@ -2,6 +2,14 @@ require_relative "lib/config.rb"
 
 local_config = loadConfig();
 
+COMPOSER_AUTH_FILE = File.expand_path(local_config['composerauth']);
+GIT_CONFIG_FILE = File.expand_path(local_config['gitconfig']);
+GIT_IGNORE_FILE = File.expand_path(local_config['gitignore']);
+GIT_ORDER_FILE = File.expand_path(local_config['gitorder']);
+GIT_ATTRIBUTES_FILE = File.expand_path(local_config['gitattributes']);
+PUBLIC_KEY_FILE = File.expand_path(local_config['public_key']);
+PRIVATE_KEY_FILE = File.expand_path(local_config['private_key']);
+
 Vagrant.configure(2) do |config|
     # Configure the box
     config.vm.box = "ubuntu/trusty64"
@@ -42,39 +50,40 @@ Vagrant.configure(2) do |config|
     # Configure The Public Key For SSH Access
     config.vm.provision "shell" do |s|
         s.inline = "echo $1 | grep -xq \"$1\" /home/vagrant/.ssh/authorized_keys || echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
-        s.args = [File.read(File.expand_path("~/.ssh/id_rsa.pub"))]
+        s.args = [File.read(PUBLIC_KEY_FILE)]
     end
 
     # Copy The SSH Private Keys To The Box
     config.vm.provision "shell" do |s|
         s.privileged = false
         s.inline = "echo \"$1\" > /home/vagrant/.ssh/id_rsa && chmod 600 /home/vagrant/.ssh/id_rsa"
-        s.args = [File.read(File.expand_path("~/.ssh/id_rsa"))]
+        s.args = [File.read(PRIVATE_KEY_FILE)]
     end
 
     # Copy various files if they exist
-    if File.exist?(local_config['gitconfig'])
-        config.vm.provision "file", source: local_config['gitconfig'], destination: "~/.gitconfig"
+    if File.exist?(GIT_CONFIG_FILE)
+        config.vm.provision "file", source: GIT_CONFIG_FILE, destination: "~/.gitconfig"
     end
 
-    if File.exist?(local_config['gitignore'])
-        config.vm.provision "file", source: local_config['gitignore'], destination: "~/.gitignore_global"
+    if File.exist?(GIT_IGNORE_FILE)
+        config.vm.provision "file", source: GIT_IGNORE_FILE, destination: "~/.gitignore_global"
     end
 
-    if File.exist?(local_config['gitorder'])
-        config.vm.provision "file", source: local_config['gitorder'], destination: "~/.gitorder_global"
+    if File.exist?(GIT_ORDER_FILE)
+        config.vm.provision "file", source: GIT_ORDER_FILE, destination: "~/.gitorder_global"
     end
 
-    if File.exist?(local_config['gitattributes'])
-        config.vm.provision "file", source: local_config['gitattributes'], destination: "~/.gitattributes_global"
+    if File.exist?(GIT_ATTRIBUTES_FILE)
+        config.vm.provision "file", source: GIT_ATTRIBUTES_FILE, destination: "~/.gitattributes_global"
     end
 
-    if File.exist?(local_config['composerauth'])
-        config.vm.provision "file", source: local_config['composerauth'], destination: "~/.composer/auth.json"
+    if File.exist?(COMPOSER_AUTH_FILE)
+        config.vm.provision "file", source: COMPOSER_AUTH_FILE, destination: "~/.composer/auth.json"
     end
 
     # Provision
     config.vm.provision "shell", inline: "sudo bash /vagrant/provisioning/provision.sh"
+    config.vm.provision "shell", inline: "sudo bash /vagrant/provisioning/profile.sh", privileged: false
 
     # Update composer on each boot
     config.vm.provision "shell", inline: "sudo /usr/local/bin/composer self-update", run: "always"
