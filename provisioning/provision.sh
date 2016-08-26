@@ -130,8 +130,8 @@ groups vagrant
 
 # Install Node
 apt-get install -y --force-yes nodejs
-/usr/bin/npm install -g gulp
-/usr/bin/npm install -g bower
+#/usr/bin/npm install -g gulp
+#/usr/bin/npm install -g bower
 
 # Install SQLite
 apt-get install -y --force-yes sqlite3 libsqlite3-dev
