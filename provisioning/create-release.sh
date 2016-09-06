@@ -61,7 +61,7 @@ echo $NEW_VERSION > VERSION
 git add VERSION
 
 # Remove the compiled assets
-git rm -rf public/build/*
+git rm --quiet -rf public/build/*
 rm -rf public/build/
 
 # Ensure all dependencies are installed
