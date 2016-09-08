@@ -23,7 +23,7 @@ sudo add-apt-repository ppa:git-core/ppa -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
 
-curl -sSL http://git.io/git-extras-setup | sudo bash /dev/stdin
+apt-get install -y --force-yes git-extras
 
 curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 
