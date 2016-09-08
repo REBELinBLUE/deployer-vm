@@ -19,6 +19,7 @@ apt-add-repository ppa:nginx/development -y
 apt-add-repository ppa:chris-lea/redis-server -y
 apt-add-repository ppa:ondrej/php -y
 apt-add-repository ppa:brightbox/ruby-ng -y
+sudo add-apt-repository ppa:git-core/ppa -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
 
