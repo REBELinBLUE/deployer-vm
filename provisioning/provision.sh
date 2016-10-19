@@ -12,6 +12,7 @@ apt-get -y upgrade
 echo "LC_ALL=en_GB.UTF-8" >> /etc/default/locale
 locale-gen en_GB.UTF-8
 
+
 # Install Some PPAs
 apt-get install -y --force-yes software-properties-common curl
 
@@ -23,6 +24,9 @@ sudo add-apt-repository ppa:git-core/ppa -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
 
+apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3
+echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 apt-get install -y --force-yes git-extras
 
 curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
@@ -31,7 +35,7 @@ curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 apt-get update -y
 
 # Install Some Basic Packages
-apt-get install -y --force-yes build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
+apt-get install -y --force-yes build-essential yarn git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
 
 # Set the Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
