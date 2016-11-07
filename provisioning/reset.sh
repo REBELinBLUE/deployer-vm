@@ -4,9 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 mysql -udeployer -psecret -e "DROP DATABASE IF EXISTS deployer;"
 mysql -udeployer -psecret -e "CREATE DATABASE deployer DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;"
-cd /var/www/deployer
-php artisan app:reset
-cd -
+php /var/www/deployer/artisan app:reset
 
 sudo cp /var/www/deployer/examples/supervisor.conf /etc/supervisor/conf.d/deployer.conf
 sudo cp /var/www/deployer/examples/crontab /etc/cron.d/deployer

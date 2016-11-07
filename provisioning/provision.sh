@@ -12,7 +12,6 @@ apt-get -y upgrade
 echo "LC_ALL=en_GB.UTF-8" >> /etc/default/locale
 locale-gen en_GB.UTF-8
 
-
 # Install Some PPAs
 apt-get install -y --force-yes software-properties-common curl
 
@@ -20,11 +19,11 @@ apt-add-repository ppa:nginx/development -y
 apt-add-repository ppa:chris-lea/redis-server -y
 apt-add-repository ppa:ondrej/php -y
 apt-add-repository ppa:brightbox/ruby-ng -y
-sudo add-apt-repository ppa:git-core/ppa -y
+add-apt-repository ppa:git-core/ppa -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
 
-apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3
+apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
 echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 apt-get install -y --force-yes git-extras
@@ -87,9 +86,6 @@ sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 100M/" /etc/php/7.0/fpm/php.ini
 sed -i "s/post_max_size = .*/post_max_size = 100M/" /etc/php/7.0/fpm/php.ini
 sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.0/fpm/php.ini
-
-# Disable XDebug On The CLI
-sudo phpdismod -s cli xdebug
 
 # Copy fastcgi_params to Nginx because they broke it on the PPA
 cat > /etc/nginx/fastcgi_params << EOF
@@ -201,7 +197,7 @@ fi
 # Copy deployer supervisor and cron config
 cp /vagrant/provisioning/supervisor.conf /etc/supervisor/conf.d/deployer.conf
 cp /vagrant/provisioning/crontab /etc/cron.d/deployer
-cp /vagrant//provisioning/nginx.conf /etc/nginx/sites-available/deployer.conf
+cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/deployer.conf
 ln -fs /etc/nginx/sites-available/deployer.conf /etc/nginx/sites-enabled/deployer.conf
 
 # Restart services
