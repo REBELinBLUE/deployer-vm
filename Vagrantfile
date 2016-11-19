@@ -2,13 +2,13 @@ require_relative "lib/config.rb"
 
 local_config = loadConfig();
 
-COMPOSER_AUTH_FILE = File.expand_path(local_config['composerauth']);
-GIT_CONFIG_FILE = File.expand_path(local_config['gitconfig']);
-GIT_IGNORE_FILE = File.expand_path(local_config['gitignore']);
-GIT_ORDER_FILE = File.expand_path(local_config['gitorder']);
-GIT_ATTRIBUTES_FILE = File.expand_path(local_config['gitattributes']);
-PUBLIC_KEY_FILE = File.expand_path(local_config['public_key']);
-PRIVATE_KEY_FILE = File.expand_path(local_config['private_key']);
+COMPOSER_AUTH_FILE ||= File.expand_path(local_config['composerauth']);
+GIT_CONFIG_FILE ||= File.expand_path(local_config['gitconfig']);
+GIT_IGNORE_FILE ||= File.expand_path(local_config['gitignore']);
+GIT_ORDER_FILE ||= File.expand_path(local_config['gitorder']);
+GIT_ATTRIBUTES_FILE ||= File.expand_path(local_config['gitattributes']);
+PUBLIC_KEY_FILE ||= File.expand_path(local_config['public_key']);
+PRIVATE_KEY_FILE ||= File.expand_path(local_config['private_key']);
 
 Vagrant.configure(2) do |config|
     # Configure the box
