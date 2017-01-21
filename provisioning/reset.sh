@@ -11,8 +11,8 @@ sudo cp /var/www/deployer/docs/examples/crontab /etc/cron.d/deployer
 sudo cp /var/www/deployer/docs/examples/nginx.conf /etc/nginx/sites-available/deployer.conf
 sudo cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/beanstalkd.conf
 
-sudo rm -rf /var/www/deployer/storage/
-sudo git checkout -- /var/www/deployer/storage/
+sudo rm -rf /var/www/deployer/storage/{framework,logs,clockwork}/
+sudo git checkout -- /var/www/deployer/storage/{framework,logs,clockwork}/
 
 sudo service supervisor restart
 redis-cli FLUSHALL
