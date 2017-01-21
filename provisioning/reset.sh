@@ -8,7 +8,8 @@ php /var/www/deployer/artisan app:reset
 
 sudo cp /var/www/deployer/docs/examples/supervisor.conf /etc/supervisor/conf.d/deployer.conf
 sudo cp /var/www/deployer/docs/examples/crontab /etc/cron.d/deployer
-sudo cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/deployer.conf
+sudo cp /var/www/deployer/docs/examples/nginx.conf /etc/nginx/sites-available/deployer.conf
+sudo cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/beanstalkd.conf
 
 sudo service supervisor restart
 redis-cli FLUSHALL
