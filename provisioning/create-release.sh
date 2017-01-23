@@ -65,7 +65,7 @@ git rm --quiet -rf public/build/*
 rm -rf public/build/
 
 # Ensure all dependencies are installed
-npm install
+yarn install
 composer install
 
 # Build the CSS/JS
