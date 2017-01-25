@@ -208,9 +208,6 @@ service nginx restart
 service cron restart
 service php7.0-fpm restart
 
-# Stop composer complaining - phpdismod -s cli xdebug isn't working
-phpdismod -s cli xdebug
-
 # Clean up
 apt-get autoremove -y --force-yes
 
