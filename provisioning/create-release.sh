@@ -27,7 +27,7 @@ CURRENT_VERSION=`curl --silent https://api.github.com/repos/REBELinBLUE/deployer
 NEW_VERSION=`sed 's/-dev//' VERSION`
 
 # Generate change log
-github_changelog_generator --future-release $NEW_VERSION
+github_changelog_generator --future-release $NEW_VERSION --exclude-labels 'Duplicate,Question,Can''t Reproduce,Won''t Fix,Hide from CHANGELOG,'
 
 # Ask for the name of the next version
 while [[ "$NEXT_VERSION" =~ ^$  ]]
@@ -65,7 +65,7 @@ git rm --quiet -rf public/build/*
 rm -rf public/build/
 
 # Ensure all dependencies are installed
-npm install
+yarn install
 composer install
 
 # Build the CSS/JS
