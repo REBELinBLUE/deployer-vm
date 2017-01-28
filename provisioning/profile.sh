@@ -21,10 +21,8 @@ fi
 echo '' >> /home/vagrant/.profile
 echo 'export PATH=$HOME/.yarn/bin:/var/www/deployer/vendor/bin:$PATH' >> /home/vagrant/.profile
 echo '' >> /home/vagrant/.profile
-echo 'alias php="php -dzend_extension=xdebug.so"' >> /home/vagrant/.profile
 echo 'alias artisan="php artisan"' >> /home/vagrant/.profile
 echo 'alias art="php artisan"' >> /home/vagrant/.profile
-echo 'alias phpunit="php $(which phpunit)"' >> /home/vagrant/.profile
 echo 'alias fresh="/vagrant/provisioning/reset.sh"' >> /home/vagrant/.profile
 echo '' >> /home/vagrant/.profile
 echo 'cd /var/www/deployer' >> /home/vagrant/.profile
