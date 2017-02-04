@@ -40,7 +40,7 @@ apt-get install -y --force-yes build-essential yarn git libmcrypt4 python-pip su
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 # Install PHP
-apt-get install -y --force-yes php7.0-cli php7.0-dev php7.0-json php7.0-xml php7.0-sqlite3 php7.0-gd php-apcu php7.0-curl php7.0-mcrypt php7.0-imap php7.0-mysql php-memcached php7.0-readline php-xdebug php7.0-mbstring php7.0-zip php7.0-intl php7.0-bcmath php7.0-soap
+apt-get install -y --force-yes php7.0-cli php7.0-dev php7.0-json php7.0-xml php7.0-phpdbg php7.0-sqlite3 php7.0-gd php-apcu php7.0-curl php7.0-mcrypt php7.0-imap php7.0-mysql php-memcached php7.0-readline php-xdebug php7.0-mbstring php7.0-zip php7.0-intl php7.0-bcmath php7.0-soap
 
 # Install Composer
 curl -sS https://getcomposer.org/installer | php
@@ -68,6 +68,8 @@ sudo ./install.sh
 cd ..
 rm -rf git-fresh
 cd ~
+
+sudo phpdismod -s ALL xdebug
 
 # Setup Some PHP-FPM Options
 echo "xdebug.remote_enable = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
