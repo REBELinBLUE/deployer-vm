@@ -25,6 +25,9 @@ echo 'alias artisan="php artisan"' >> /home/vagrant/.profile
 echo 'alias art="php artisan"' >> /home/vagrant/.profile
 echo 'alias fresh="/vagrant/provisioning/reset.sh"' >> /home/vagrant/.profile
 echo '' >> /home/vagrant/.profile
+echo 'alias stopall="/vagrant/provisioning/stop.sh"' >> /home/vagrant/.profile
+echo 'alias startall="/vagrant/provisioning/start.sh"' >> /home/vagrant/.profile
+echo '' >> /home/vagrant/.profile
 echo 'cd /var/www/deployer' >> /home/vagrant/.profile
 
 if [ -f /vagrant/provisioning/extras.sh ]; then
