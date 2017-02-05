@@ -184,7 +184,7 @@ sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
 
 # Install github changelog generator
 DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes ruby2.3 ruby2.3-dev httpie
-gem install github_changelog_generator
+gem install github_changelog_generator travis
 
 # Install diff-so-fancy
 npm install -g diff-so-fancy
