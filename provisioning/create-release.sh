@@ -27,7 +27,7 @@ CURRENT_VERSION=`curl --silent https://api.github.com/repos/REBELinBLUE/deployer
 NEW_VERSION=`sed 's/-dev//' VERSION`
 
 # Generate change log
-github_changelog_generator --future-release $NEW_VERSION --exclude-labels 'Duplicate,Question,Can''t Reproduce,Won''t Fix,Hide from CHANGELOG,'
+github_changelog_generator --future-release $NEW_VERSION --exclude-labels "Duplicate,Question,Can't Reproduce,Won't Fix,Hide from CHANGELOG,"
 
 # Ask for the name of the next version
 while [[ "$NEXT_VERSION" =~ ^$  ]]
@@ -39,15 +39,16 @@ done
 echo -n $NEXT_VERSION > VERSION
 echo '-dev' >> VERSION
 
-# Replace the current version with the new version in the README
-read -p "Update the version in the README? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-	sed -i "s/checkout $CURRENT_VERSION/checkout $NEW_VERSION/g" README.md
-fi
+# # Replace the current version with the new version in the README
+# read -p "Update the version in the README? " -n 1 -r
+# echo    # (optional) move to a new line
+# if [[ $REPLY =~ ^[Yy]$ ]]; then
+# 	sed -i "s/checkout $CURRENT_VERSION/checkout $NEW_VERSION/g" README.md
+# fi
 
 # Commit the updated files
-git add CHANGELOG.md VERSION README.md
+git add CHANGELOG.md VERSION
+# README.md
 git commit -m 'Updated CHANGELOG'
 git push
 
