@@ -29,37 +29,8 @@ NEW_VERSION=`sed 's/-dev//' VERSION`
 # Generate change log
 github_changelog_generator --future-release $NEW_VERSION --exclude-labels "Duplicate,Question,Can't Reproduce,Won't Fix,Hide from CHANGELOG,"
 
-# Ask for the name of the next version
-while [[ "$NEXT_VERSION" =~ ^$  ]]
-do
-	read -p 'Enter the next version: ' NEXT_VERSION
-done
-
-# Append -dev and update the VERSION file
-echo -n $NEXT_VERSION > VERSION
-echo '-dev' >> VERSION
-
-# # Replace the current version with the new version in the README
-# read -p "Update the version in the README? " -n 1 -r
-# echo    # (optional) move to a new line
-# if [[ $REPLY =~ ^[Yy]$ ]]; then
-# 	sed -i "s/checkout $CURRENT_VERSION/checkout $NEW_VERSION/g" README.md
-# fi
-
 # Commit the updated files
 git add CHANGELOG.md VERSION
-# README.md
-git commit -m 'Updated CHANGELOG'
-git push
-
-# Switch to the release branch and merge master into it, overwriting any conflicts with the version in mast
-git checkout release
-git merge --no-edit -q -X theirs master
-
-# Set the new version
-echo $NEW_VERSION > VERSION
-
-git add VERSION
 
 # Remove the compiled assets
 git rm --quiet -rf public/build/*
@@ -72,19 +43,23 @@ composer install
 # Build the CSS/JS
 gulp --production
 
-git add -f public/build/rev-manifest.json
-git add -f public/build/css/*.css
-git add -f public/build/js/*.js
-git add -f public/build/fonts/*
+git add public/build/rev-manifest.json
+git add public/build/css/*.css
+git add public/build/js/*.js
+git add public/build/fonts/*
 
 # Commit the build and switch back to master
 git commit -am 'Building new release'
 git push
 
-git checkout master
-git branch -D release
+# Ask for the name of the next version
+while [[ "$NEXT_VERSION" =~ ^$  ]]
+do
+	read -p 'Enter the next version: ' NEXT_VERSION
+done
 
-# Build the assets as switching back would have removed them
-gulp
+# Append -dev and update the VERSION file
+echo -n $NEXT_VERSION > VERSION
+echo '-dev' >> VERSION
 
-#git stash pop "tmp-create-release"
+git add VERSION
