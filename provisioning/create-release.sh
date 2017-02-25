@@ -26,6 +26,8 @@ CURRENT_VERSION=`curl --silent https://api.github.com/repos/REBELinBLUE/deployer
 # Remove -dev from the version in the VERSION file
 NEW_VERSION=`sed 's/-dev//' VERSION`
 
+echo -n $NEW_VERSION > VERSION
+
 # Generate change log
 github_changelog_generator --future-release $NEW_VERSION --exclude-labels "Duplicate,Question,Can't Reproduce,Won't Fix,Hide from CHANGELOG,"
 
