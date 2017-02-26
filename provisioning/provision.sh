@@ -69,7 +69,7 @@ cd ..
 rm -rf git-fresh
 cd ~
 
-#sudo phpdismod -s ALL xdebug
+sudo phpdismod -s ALL xdebug
 
 # Setup Some PHP-FPM Options
 echo "xdebug.remote_enable = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
