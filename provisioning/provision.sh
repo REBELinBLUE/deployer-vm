@@ -197,10 +197,15 @@ if [ ! -d /var/www/beanstalk ]; then
 fi
 
 # Copy deployer supervisor and cron config
-cp /vagrant/provisioning/supervisor.conf /etc/supervisor/conf.d/deployer.conf
-cp /vagrant/provisioning/crontab /etc/cron.d/deployer
-cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/deployer.conf
+#cp /vagrant/provisioning/supervisor.conf /etc/supervisor/conf.d/deployer.conf
+#cp /vagrant/provisioning/crontab /etc/cron.d/deployer
+cp /vagrant/provisioning/nginx.conf /etc/nginx/sites-available/beanstalk.conf
+cp /var/www/deployer/examples/supervisor.conf /etc/supervisor/conf.d/deployer.conf
+cp /var/www/deployer/examples/nginx.conf /etc/nginx/sites-available/deployer.conf
+cp /var/www/deployer/examples/crontab /etc/cron.d/deployer
+
 ln -fs /etc/nginx/sites-available/deployer.conf /etc/nginx/sites-enabled/deployer.conf
+ln -fs /etc/nginx/sites-available/beanstalkd.conf /etc/nginx/sites-enabled/beanstalkd.conf
 
 # Restart services
 service redis-server restart
