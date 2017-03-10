@@ -12,7 +12,7 @@ PRIVATE_KEY_FILE ||= File.expand_path(local_config['private_key']);
 
 Vagrant.configure(2) do |config|
     # Configure the box
-    config.vm.box = "ubuntu/trusty64"
+    config.vm.box = "ubuntu/yakkety64"
     config.vm.hostname = local_config["hostname"]
     config.vm.box_check_update = true
 

@@ -13,7 +13,7 @@ echo "LC_ALL=en_GB.UTF-8" >> /etc/default/locale
 locale-gen en_GB.UTF-8
 
 # Install Some PPAs
-apt-get install -y --force-yes software-properties-common curl
+apt-get install -y software-properties-common curl
 
 apt-add-repository ppa:nginx/development -y
 apt-add-repository ppa:chris-lea/redis-server -y
@@ -26,7 +26,7 @@ add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitaloce
 apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
 echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-apt-get install -y --force-yes git-extras
+apt-get install -y git-extras
 
 curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 
@@ -34,13 +34,13 @@ curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 apt-get update -y
 
 # Install Some Basic Packages
-apt-get install -y --force-yes build-essential yarn git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
+apt-get install -y build-essential yarn git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
 
 # Set the Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 # Install PHP
-apt-get install -y --force-yes php7.0-cli php7.0-dev php7.0-json php7.0-xml php7.0-phpdbg php7.0-sqlite3 php7.0-gd php-apcu php7.0-curl php7.0-mcrypt php7.0-imap php7.0-mysql php-memcached php7.0-readline php-xdebug php7.0-mbstring php7.0-zip php7.0-intl php7.0-bcmath php7.0-soap
+apt-get install -y php7.0-cli php7.0-dev php7.0-json php7.0-xml php7.0-phpdbg php7.0-sqlite3 php7.0-gd php-apcu php7.0-curl php7.0-mcrypt php7.0-imap php7.0-mysql php-memcached php7.0-readline php-xdebug php7.0-mbstring php7.0-zip php7.0-intl php7.0-bcmath php7.0-soap
 
 # Install Composer
 curl -sS https://getcomposer.org/installer | php
@@ -54,7 +54,7 @@ sudo sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.0/cli/php.ini
 sudo sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.0/cli/php.ini
 
 # Install Nginx & PHP-FPM
-apt-get install -y --force-yes nginx php7.0-fpm
+apt-get install -y  nginx php7.0-fpm
 
 rm -rf /var/www/html
 rm /etc/nginx/sites-enabled/default
@@ -132,19 +132,19 @@ id vagrant
 groups vagrant
 
 # Install Node
-apt-get install -y --force-yes nodejs
+apt-get install -y nodejs
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
 
 # Install SQLite
-apt-get install -y --force-yes sqlite3 libsqlite3-dev
+apt-get install -y sqlite3 libsqlite3-dev
 
 # Install MariaDB
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/data-dir select ''"
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/root_password password secret"
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/root_password_again password secret"
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes mariadb-server
+DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server
 
 # Configure MySQL Password Lifetime
 echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
@@ -171,7 +171,7 @@ mysql -udeployer -psecret -e "CREATE DATABASE deployer DEFAULT CHARACTER SET utf
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --user=root --password=secret mysql
 
 # Install A Few Other Things
-apt-get install -y --force-yes redis-server memcached beanstalkd
+apt-get install -y redis-server memcached beanstalkd
 
 # Configure Beanstalkd
 sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
@@ -183,7 +183,7 @@ sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
 /sbin/swapon /var/swap.1
 
 # Install github changelog generator
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes ruby2.3 ruby2.3-dev httpie
+DEBIAN_FRONTEND=noninteractive apt-get install -y ruby2.3 ruby2.3-dev httpie
 gem install github_changelog_generator travis
 
 # Install diff-so-fancy
