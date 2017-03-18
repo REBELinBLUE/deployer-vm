@@ -21,7 +21,7 @@ apt-add-repository ppa:ondrej/php -y
 apt-add-repository ppa:brightbox/ruby-ng -y
 add-apt-repository ppa:git-core/ppa -y
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main'
+add-apt-repository 'deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu yakkety main'
 
 apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
 echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -34,7 +34,7 @@ curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 apt-get update -y
 
 # Install Some Basic Packages
-apt-get install -y build-essential yarn git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
+apt-get install -y build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
 
 # Set the Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
@@ -54,7 +54,7 @@ sudo sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.0/cli/php.ini
 sudo sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.0/cli/php.ini
 
 # Install Nginx & PHP-FPM
-apt-get install -y  nginx php7.0-fpm
+apt-get install -y nginx php7.0-fpm
 
 rm -rf /var/www/html
 rm /etc/nginx/sites-enabled/default
@@ -113,26 +113,26 @@ fastcgi_param	REDIRECT_STATUS		200;
 EOF
 
 # Set The Nginx & PHP-FPM User
-sed -i "s/user www-data;/user vagrant;/" /etc/nginx/nginx.conf
+sed -i "s/user www-data;/user ubuntu;/" /etc/nginx/nginx.conf
 sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
 
-sed -i "s/user = www-data/user = vagrant/" /etc/php/7.0/fpm/pool.d/www.conf
-sed -i "s/group = www-data/group = vagrant/" /etc/php/7.0/fpm/pool.d/www.conf
+sed -i "s/user = www-data/user = ubuntu/" /etc/php/7.0/fpm/pool.d/www.conf
+sed -i "s/group = www-data/group = ubuntu/" /etc/php/7.0/fpm/pool.d/www.conf
 
-sed -i "s/listen\.owner.*/listen.owner = vagrant/" /etc/php/7.0/fpm/pool.d/www.conf
-sed -i "s/listen\.group.*/listen.group = vagrant/" /etc/php/7.0/fpm/pool.d/www.conf
+sed -i "s/listen\.owner.*/listen.owner = ubuntu/" /etc/php/7.0/fpm/pool.d/www.conf
+sed -i "s/listen\.group.*/listen.group = ubuntu/" /etc/php/7.0/fpm/pool.d/www.conf
 sed -i "s/;listen\.mode.*/listen.mode = 0666/" /etc/php/7.0/fpm/pool.d/www.conf
 
 service nginx restart
 service php7.0-fpm restart
 
-# Add Vagrant User To WWW-Data
-usermod -a -G www-data vagrant
-id vagrant
-groups vagrant
+# Add Ubuntu User To WWW-Data
+usermod -a -G www-data ubuntu
+id ubuntu
+groups ubuntu
 
 # Install Node
-apt-get install -y nodejs
+apt-get install -y nodejs yarn
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
 
@@ -144,7 +144,7 @@ debconf-set-selections <<< "mariadb-server-10.1 mysql-server/data-dir select ''"
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/root_password password secret"
 debconf-set-selections <<< "mariadb-server-10.1 mysql-server/root_password_again password secret"
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server
+DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated mariadb-server
 
 # Configure MySQL Password Lifetime
 echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
@@ -193,7 +193,7 @@ npm install -g diff-so-fancy
 if [ ! -d /var/www/beanstalk ]; then
     composer create-project ptrofimov/beanstalk_console -q -n -s dev /var/www/beanstalk
     cp /vagrant/provisioning/beanstalk-console-config.php /var/www/beanstalk/config.php
-    chown -R vagrant:vagrant /var/www/beanstalk
+    chown -R ubuntu:ubuntu /var/www/beanstalk
 fi
 
 # Copy deployer supervisor and cron config
