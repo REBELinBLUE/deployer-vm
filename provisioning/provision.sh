@@ -40,7 +40,7 @@ apt-get install -y build-essential git libmcrypt4 python-pip supervisor unattend
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 # Install PHP
-apt-get install -y php7.0-cli php7.0-dev php7.0-json php7.0-xml php7.0-phpdbg php7.0-sqlite3 php7.0-gd php-apcu php7.0-curl php7.0-mcrypt php7.0-imap php7.0-mysql php-memcached php7.0-readline php-xdebug php7.0-mbstring php7.0-zip php7.0-intl php7.0-bcmath php7.0-soap
+apt-get install -y --allow-unauthenticated php7.0-cli php7.0-dev php7.0-json php7.0-xml php7.0-phpdbg php7.0-sqlite3 php7.0-gd php-apcu php7.0-curl php7.0-mcrypt php7.0-imap php7.0-mysql php-memcached php7.0-readline php-xdebug php7.0-mbstring php7.0-zip php7.0-intl php7.0-bcmath php7.0-soap
 
 # Install Composer
 curl -sS https://getcomposer.org/installer | php
