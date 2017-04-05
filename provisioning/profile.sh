@@ -19,7 +19,7 @@ fi
 
 # Update .profile
 echo '' >> /home/ubuntu/.ubuntu
-echo 'export PATH=$HOME/.yarn/bin:/var/www/deployer/vendor/bin:$PATH' >> /home/vagrant/.profile
+echo 'export PATH=$HOME/.yarn/bin:/var/www/deployer/vendor/bin:$PATH' >> /home/ubuntu/.profile
 echo '' >> /home/ubuntu/.profile
 echo 'alias artisan="php artisan"' >> /home/ubuntu/.profile
 echo 'alias art="php artisan"' >> /home/ubuntu/.profile
