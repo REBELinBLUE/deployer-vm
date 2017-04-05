@@ -18,7 +18,7 @@ if [ -f /home/ubuntu/.gitattributes_global ]; then
 fi
 
 # Update .profile
-echo '' >> /home/ubuntu/.ubuntu
+echo '' >> /home/ubuntu/.profile
 echo 'export PATH=$HOME/.yarn/bin:/var/www/deployer/vendor/bin:$PATH' >> /home/ubuntu/.profile
 echo '' >> /home/ubuntu/.profile
 echo 'alias artisan="php artisan"' >> /home/ubuntu/.profile
