@@ -34,7 +34,7 @@ curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 apt-get update -y
 
 # Install Some Basic Packages
-apt-get install -y --allow-unauthenticated build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin
+apt-get install -y --allow-unauthenticated build-essential git libmcrypt4 python-pip supervisor unattended-upgrades nano libnotify-bin git-extras
 
 # Set the Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
