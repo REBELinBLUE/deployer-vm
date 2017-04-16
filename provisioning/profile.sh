@@ -21,6 +21,7 @@ fi
 echo '' >> /home/ubuntu/.profile
 echo 'export PATH=$HOME/.yarn/bin:/var/www/deployer/vendor/bin:$PATH' >> /home/ubuntu/.profile
 echo '' >> /home/ubuntu/.profile
+echo 'alias phpx="php -d zend_extension=xdebug.so"' >> /home/ubuntu/.profile
 echo 'alias artisan="php artisan"' >> /home/ubuntu/.profile
 echo 'alias art="php artisan"' >> /home/ubuntu/.profile
 echo 'alias fresh="/vagrant/provisioning/reset.sh"' >> /home/ubuntu/.profile
@@ -28,7 +29,9 @@ echo '' >> /home/ubuntu/.profile
 echo 'alias stopall="/vagrant/provisioning/stop.sh"' >> /home/ubuntu/.profile
 echo 'alias startall="/vagrant/provisioning/start.sh"' >> /home/ubuntu/.profile
 echo '' >> /home/ubuntu/.profile
-echo 'cd /var/www/deployer' >> /home/ubuntu/.profile
+echo 'export PHP_IDE_CONFIG="serverName=deployer.app"' >> /home/ubuntu/.profile
+echo '' >> /home/ubuntu/.profile
+echo 'cd /var/www/deployer' >> /home/ubuntu/.proftile
 
 if [ -f /ubuntu/provisioning/extras.sh ]; then
     /ubuntu/provisioning/extras.sh

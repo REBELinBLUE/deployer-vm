@@ -69,17 +69,27 @@ cd ..
 rm -rf git-fresh
 cd ~
 
-sudo phpdismod -s ALL xdebug
+sudo phpdismod -s cli xdebug
 
 # Setup Some PHP-FPM Options
+echo '' >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.remote_enable = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.remote_connect_back = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.remote_port = 9000" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
+echo "xdebug.remote_host = 10.0.2.2" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.max_nesting_level = 512" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.profiler_enable = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
-echo "xdebug.profile_enable_trigger = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
+echo "xdebug.profiler_enable_trigger = 1" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.profiler_output_dir = /vagrant/cachegrind" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
 echo "xdebug.idekey = PHPSTORM" >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
+
+echo "xdebug.remote_enable = 1" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+echo "xdebug.remote_connect_back = 0" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+echo "xdebug.remote_autostart = 1" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+echo "xdebug.remote_port = 9000" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+echo "xdebug.remote_host = 10.0.2.2" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+echo "xdebug.idekey = PHPSTORM" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/fpm/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.0/fpm/php.ini
