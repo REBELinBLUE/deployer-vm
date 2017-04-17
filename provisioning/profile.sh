@@ -31,7 +31,7 @@ echo 'alias startall="/vagrant/provisioning/start.sh"' >> /home/ubuntu/.profile
 echo '' >> /home/ubuntu/.profile
 echo 'export PHP_IDE_CONFIG="serverName=deployer.app"' >> /home/ubuntu/.profile
 echo '' >> /home/ubuntu/.profile
-echo 'cd /var/www/deployer' >> /home/ubuntu/.proftile
+echo 'cd /var/www/deployer' >> /home/ubuntu/.profile
 
 if [ -f /ubuntu/provisioning/extras.sh ]; then
     /ubuntu/provisioning/extras.sh
