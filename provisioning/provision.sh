@@ -90,7 +90,6 @@ echo "xdebug.remote_port = 9000" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
 echo "xdebug.remote_host = 10.0.2.2" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
 echo "xdebug.idekey = PHPSTORM" >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
 
-
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/fpm/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.0/fpm/php.ini
 sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.0/fpm/php.ini
